@@ -8,6 +8,7 @@ CREATE TABLE `USERS` (
 `id` int(3) PRIMARY KEY AUTO_INCREMENT
 ,`name` varchar(20) NOT NULL
 ,`surname` varchar(20) NOT NULL
+, `email` varchar(30) NOT NULL
 ,`username` varchar(20) NOT NULL
 ,`password` varchar(255) NOT NULL
 );
