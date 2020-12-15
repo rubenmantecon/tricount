@@ -5,17 +5,26 @@ USE `tricount`;
 DROP TABLE IF EXISTS `USERS`;
 
 CREATE TABLE `USERS` (
-`id` int(3) PRIMARY KEY
+`id` int(3) PRIMARY KEY AUTO_INCREMENT
 ,`name` varchar(20) NOT NULL
 ,`surname` varchar(20) NOT NULL
+, `email` varchar(30) NOT NULL
 ,`username` varchar(20) NOT NULL
-,`password` varchar(20) NOT NULL
+,`password` varchar(255) NOT NULL
 );
+
 
 DROP TABLE IF EXISTS `TRAVELS`;
 
+/*Maybe in TRAVELS there should be a check
+to see if arrival_date > depart_date.
+
+We can't timetravel yet.
+Also, depart and arrival must be different.It has been agreed
+to filter this in the PHP server logic, not the backend itself*/
+
 CREATE TABLE `TRAVELS` (
-`id` int(3) PRIMARY KEY
+`id` int(3) PRIMARY KEY AUTO_INCREMENT
 , `name` varchar(30) NOT NULL
 , `depart` varchar(30) NOT NULL
 , `arrival` varchar(30) NOT NULL
@@ -23,10 +32,12 @@ CREATE TABLE `TRAVELS` (
 , `arrival_date` date NOT NULL
 );
 
+
+
 DROP TABLE IF EXISTS `EXPENDITURES`;
 
 CREATE TABLE `EXPENDITURES` (
-`id` int(3) PRIMARY KEY
+`id` int(3) PRIMARY KEY AUTO_INCREMENT
 , `amount` decimal(13,2) NOT NULL
 , `emission_date` date NOT NULL
 );
