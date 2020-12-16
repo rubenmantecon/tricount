@@ -1,3 +1,4 @@
+onload= 
 function messageWarning(number, message) {
 	let numberCodeWarning = number;
 	let msgInWarning = message;
@@ -26,6 +27,7 @@ function createForm() {
 	o.setAttribute('type', "text");
 	o.setAttribute('name', "description");
 	o.setAttribute('placeholder', "Descripción");
+
 	var p = document.createElement("input");
 	p.setAttribute('type', "text");
 	p.setAttribute('name', "moneyType");
@@ -42,6 +44,9 @@ function createForm() {
 	document.getElementsByTagName('body')[0].appendChild(f);
 }
 
-const insertAfter = (node, element) => {
-	element.parentNode.insertBefore(node, element.nextElementSibling);
-};
+function createNewEmailImput(){
+	var newForm = document.createElement("input");
+	newForm.setAttribute('type', "email");
+	newForm.setAttribute('placeholder', "email");
+	emailForm.appendChild(newForm)
+}
