@@ -16,20 +16,46 @@ function connectToDatabase(string $user = 'root', string $pass = '', string $hos
 	}
 }
 
-
 function intoColumnsForQuery(array $columns):string {
 	$result = '';
-	foreach ($columns as $col) {
-		$result .= $col;
+	foreach ($columns as $c) {
+		$result .= $c;
 		$result .= ', ';
 	}
 	$result = rtrim($result, ", ");
 	return $result;
 }
 
-// function prepareStatement(string $table, array $columns, array $boundParameters) {
-// 	$pdo = connectToDatabase();
-// 	$cols = intoColumnsForQuery($columns);
+function executeSelect(string $table, array $columns): bool {
+	$pdo = connectToDatabase();
+	$cols = intoColumnsForQuery($columns);
+	$query = $pdo->prepare('SELECT ' . $cols . 'FROM ' . $table . ';');
+	$query->execute();
+	$e= $query->errorInfo();
+  if ($e[0]!='00000') {
+		$errormsg = '';
+		$errormsg .= "\nPDO::errorInfo():\n" . "Error accedint a dades: " . $e[2];
+		return $errormsg;
+  }
+	//$result = $query->fetchAll();
+	return true;
+}
 
-// 	$pdo->prepare('SELECT ' . $cols . 'FROM ' . $table . ' WHERE calories < :calories AND colour = :colour');
-// }
+function executeInsert(string $table, array $columnsAndValues): bool{
+	$pdo = connectToDatabase();
+	$cols = array_keys($columnsAndValues);
+	$columns = intoColumnsForQuery($cols);
+	$vals = array_keys(array_flip($columnsAndValues));
+	$values = intoColumnsForQuery($vals);
+
+	$query = $pdo->prepare('INSERT INTO ' . $table . ' (' . $columns .' VALUES(' . $values . 'FROM ' . $table . ';');
+	$query->execute();
+	$e= $query->errorInfo();
+  if ($e[0]!='00000') {
+		$errormsg = '';
+		$errormsg .= "\nPDO::errorInfo():\n" . "Error accedint a dades: " . $e[2];
+		return $errormsg;
+	}	
+	//$result = $query->fetchAll();
+	return true;
+}
