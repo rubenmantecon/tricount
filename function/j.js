@@ -41,3 +41,7 @@ function createForm() {
 	f.appendChild(s);
 	document.getElementsByTagName('body')[0].appendChild(f);
 }
+
+const insertAfter = (node, element) => {
+	element.parentNode.insertBefore(node, element.nextElementSibling);
+};
