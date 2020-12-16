@@ -26,7 +26,7 @@ function intoColumnsForQuery(array $columns):string {
 	return $result;
 }
 
-function executeSelect(string $table, array $columns): array {
+function executeSelect(string $table, array $columns): bool {
 	$pdo = connectToDatabase();
 	$cols = intoColumnsForQuery($columns);
 	$query = $pdo->prepare('SELECT ' . $cols . 'FROM ' . $table . ';');
@@ -37,11 +37,11 @@ function executeSelect(string $table, array $columns): array {
 		$errormsg .= "\nPDO::errorInfo():\n" . "Error accedint a dades: " . $e[2];
 		return $errormsg;
   }
-	$result = $query->fetchAll();
-	return $result;
+	//$result = $query->fetchAll();
+	return true;
 }
 
-function executeInsert(string $table, array $columnsAndValues): array{
+function executeInsert(string $table, array $columnsAndValues): bool{
 	$pdo = connectToDatabase();
 	$cols = array_keys($columnsAndValues);
 	$columns = intoColumnsForQuery($cols);
@@ -56,7 +56,6 @@ function executeInsert(string $table, array $columnsAndValues): array{
 		$errormsg .= "\nPDO::errorInfo():\n" . "Error accedint a dades: " . $e[2];
 		return $errormsg;
 	}	
-
-	$result = $query->fetchAll();
-	return $result;
+	//$result = $query->fetchAll();
+	return true;
 }
