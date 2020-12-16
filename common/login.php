@@ -21,6 +21,8 @@
 
 </head>
 <?php
+include "function/p.php"
+$dbconection = connectToDatabase();
 if (isset($_POST['logearse'])) {
     // Requerimos el email también:
     if (empty($_POST["emailog"])) {
@@ -41,11 +43,11 @@ if (isset($_POST['logearse'])) {
         $sanitizedData = array("password" => $_POST['password']);
     }
 }
-$x = true; /* Funcion ruben */
+$x = false; /* Funcion ruben */
 if ($x) {
     header("Location: home.php");
 } else {
-    //Error sergio
+    //Codigo sergio
 }
 ?>
 
@@ -64,7 +66,7 @@ if ($x) {
             <button>create</button>
             <p class="message">Ya estas registrado? <a href="#">Sign In</a></p>
         </form>
-        <form class="login-form" action="index.php" method="post">
+        <form class="login-form" action="login.php" method="post">
             <input type="text" placeholder="email" name="emailog" id="emailog" />
             <input type="password" placeholder="password" name="password" id="password" />
             <input type="submit" name="logearse"></button>
@@ -72,7 +74,7 @@ if ($x) {
         </form>
     </div>
 
-    <script src="function/reglog.js"></script>
+    <script src="../function/reglog.js"></script>
 </body>
 
 </html>
