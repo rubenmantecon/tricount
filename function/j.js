@@ -10,8 +10,12 @@ function messageWarning (number,message){
     else{
         document.getElementById("warningSpace").innerHTML=('<div style="background-color:#ebf81e; width:50%;"><h5>Warning:'+ msgInWarning +'</h5></div>')
     }    
+}
+
+function createForm(){
+    var f = document.createElement("form");
     f.setAttribute('method',"post");
-    f.setAttribute('action',"submit.php");
+    f.setAttribute('action',"invitations.html");
 
     var i = document.createElement("input"); //input element, text
     i.setAttribute('type',"text");
