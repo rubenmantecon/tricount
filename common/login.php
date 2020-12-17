@@ -40,32 +40,33 @@ if (isset($_POST['logearse'])) {
         // Queremos que el email tenga un formato adecuado
         if (filter_var($_POST['emailog'], FILTER_VALIDATE_EMAIL)) {
             $sanitizedData['email'] = $_POST['emailog'];
+            $emailsquery = executeSelect2("users","email");
+            foreach ($emailsquery as $debug){
+                foreach ($debug as $debug2) {
+                    if($debug2 == $sanitizedData['email'] ){
+                        $passwordQuery = $dbconection->prepare('SELECT password FROM tricount.users where email ="'.$sanitizedData['email'].'"');
+                        $passwordQuery->execute();
+                        $passwordQuery = $passwordQuery->fetchAll();
+                            if ($passwordQuery[0][0] == $sanitizedData["password"]){
+                                $error = false;
+                                header("Location: home.php");
+                                break;
+                            }else{
+                                //Codigo sergio
+                                echo "Contraseña incorrecta" ;
+                                $error = "1,Contraseña incorrecta";
+                                break;
+                            }
+                    }
+                };
+            }
         } else {
             //Codigo sergio
             echo "correo no valido";
             $error = "1,Correo no valido";
         }
     }
-    $emailsquery = executeSelect2("users","email");
-    foreach ($emailsquery as $debug){
-        foreach ($debug as $debug2) {
-            if($debug2 == $sanitizedData['email'] ){
-                $passwordQuery = $dbconection->prepare('SELECT password FROM tricount.users where email ="'.$sanitizedData['email'].'"');
-                $passwordQuery->execute();
-                $passwordQuery = $passwordQuery->fetchAll();
-                    if ($passwordQuery[0][0] == $sanitizedData["password"]){
-                        $error = false;
-                        header("Location: home.php");
-                        break;
-                    }else{
-                        //Codigo sergio
-                        echo "Contraseña incorrecta" ;
-                        $error = "1,Contraseña incorrecta";
-                        break;
-                    }
-            }
-        };
-    }
+  
 }
 ?>
 <body>
