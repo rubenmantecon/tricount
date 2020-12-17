@@ -68,7 +68,7 @@
         </table>
         </div>
         <div class="d-flex justify-content-center">
-            <a href="" type="button" class="btn btn-secondary btn-lg">Añadir viaje</a>
+            <a href="../src/invitations.html" type="button" class="btn btn-secondary btn-lg">Añadir viaje</a>
         </div>
     </div>
     <script src="../function/home.js"></script>
