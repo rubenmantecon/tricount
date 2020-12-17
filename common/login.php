@@ -1,3 +1,4 @@
+<?php declare(strict_types=1);?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,37 +22,54 @@
 
 </head>
 <?php
-include "function/p.php"
+$error = false;
+include '../function/p.php';
+$sanitizedData = [];
 $dbconection = connectToDatabase();
 if (isset($_POST['logearse'])) {
     // Requerimos el email también:
-    if (empty($_POST["emailog"])) {
+    if (empty($_POST["password"])) {
         //Codigo sergio
+        $error = "1,Tienes que insertar una contraseña";
+    } else {
+        $sanitizedData['password']= $_POST['password'];
+    }
+    if (empty($_POST["emailog"])) {
+        $error = "1,Tienes que insertar un correo";
     } else {
         // Queremos que el email tenga un formato adecuado
         if (filter_var($_POST['emailog'], FILTER_VALIDATE_EMAIL)) {
-            $sanitizedData = array("email" => $_POST['emailog']);
+            $sanitizedData['email'] = $_POST['emailog'];
         } else {
             //Codigo sergio
             echo "correo no valido";
+            $error = "1,Correo no valido";
         }
     }
-    if (empty($_POST["password"])) {
-        //Codigo sergio
-        echo "contraseña no valdia";
-    } else {
-        $sanitizedData = array("password" => $_POST['password']);
+    $emailsquery = executeSelect2("users","email");
+    foreach ($emailsquery as $debug){
+        foreach ($debug as $debug2) {
+            if($debug2 == $sanitizedData['email'] ){
+                $passwordQuery = $dbconection->prepare('SELECT password FROM tricount.users where email ="'.$sanitizedData['email'].'"');
+                $passwordQuery->execute();
+                $passwordQuery = $passwordQuery->fetchAll();
+                    if ($passwordQuery[0][0] == $sanitizedData["password"]){
+                        $error = false;
+                        header("Location: home.php");
+                        break;
+                    }else{
+                        //Codigo sergio
+                        echo "Contraseña incorrecta" ;
+                        $error = "1,Contraseña incorrecta";
+                        break;
+                    }
+            }
+        };
     }
 }
-$x = false; /* Funcion ruben */
-if ($x) {
-    header("Location: home.php");
-} else {
-    //Codigo sergio
-}
 ?>
-
 <body>
+    <div id="warningSpace"></div>
     <div class="container">
         <div class="info">
             <h1>Bienvenidos a tricount </h1>
@@ -75,6 +93,7 @@ if ($x) {
     </div>
 
     <script src="../function/reglog.js"></script>
+    <script src="../function/j.js"></script>
 </body>
 
 </html>

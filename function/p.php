@@ -37,8 +37,21 @@ function executeSelect(string $table, array $columns): bool {
 		$errormsg .= "\nPDO::errorInfo():\n" . "Error accedint a dades: " . $e[2];
 		return $errormsg;
   }
-	//$result = $query->fetchAll();
-	return true;
+	$result = $query->fetchAll();
+	return $result;
+}
+function executeSelect2(string $table, string $columns): array {
+	$pdo = connectToDatabase();
+	$query = $pdo->prepare('SELECT ' . $columns . ' FROM ' . $table . ';');
+	$query->execute();
+	$e= $query->errorInfo();
+  if ($e[0]!='00000') {
+		$errormsg = '';
+		$errormsg .= "\nPDO::errorInfo():\n" . "Error accedint a dades: " . $e[2];
+		return $errormsg;
+  }
+	$result = $query->fetchAll();
+	return $result;
 }
 
 function executeInsert(string $table, array $columnsAndValues): bool{
