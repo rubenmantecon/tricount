@@ -18,8 +18,8 @@
         <h1 class=>Bienvenido a tu casa</h1>
         <h2>Gestiona tus pagos del viaje mucho mas facil con Tricount</h2>
         <div>
-            <a href="common/login.php" type="button" class="btn btn-primary btn-lg">Large button</a>
-            <a href="common/register.php" type="button" class="btn btn-secondary btn-lg">Large button</a>
+            <a href="common/login.php" type="button" class="btn btn-primary btn-lg">INICIAR SESIÓN</a>
+            <a href="common/register.php" type="button" class="btn btn-secondary btn-lg">REGISTRARSE</a>
         </div>
     </div>
 </body>
