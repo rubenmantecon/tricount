@@ -1,0 +1,15 @@
+#createdTable{
+    display: none;
+}
+td {
+    text-align: center;
+}
+th {
+    padding: 10px;
+}
+.sortUpdate {
+    margin-left: 10px;
+}
+.buttons {
+    margin-top: 20px;
+}
