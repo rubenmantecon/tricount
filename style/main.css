@@ -1,3 +1,7 @@
-html{
+html , body, .minheight{
   height: 100%;
+}
+
+.errorColor {
+  color: #ef3b3a;
 }
