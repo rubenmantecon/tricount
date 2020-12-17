@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<script type="text/javascript"src="../function/j.js"></script>
+	<title>Invitaciones</title>
 </head>
 <body>
-	<input placeholder="mail "type="text">
-	<button type="submit">Envia</button>
-
-	<div>
-		Btón de más
-	</div>
+	<center>
+		<form method="post" id="emailForm">
+			<input type="email" placehorlder="email">
+			<input type="submit" value="Enviar">
+		</form>
+		<div>
+			<button onclick="createNewEmailImput()">+</button>
+		</div>
+	</center>
 </body>
 </html>

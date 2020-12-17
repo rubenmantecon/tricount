@@ -1,3 +1,5 @@
+document.onload = messageWarning(2,"Has iniciado sesion con exito")
+
 $('.sortCreate').click(function() {
     $('#updateTable').animate({
         opacity: "toggle"

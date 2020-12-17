@@ -1,0 +1,17 @@
+.thumbnail {
+    background: #ef3b3a;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 30px;
+    padding: 50px 30px;
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
+    border-bottom-left-radius: 100%;
+    border-bottom-right-radius: 100%;
+    box-sizing: border-box;
+  }
+  
+.thumbnail img {
+    display: block;
+    width: 100%;
+  }

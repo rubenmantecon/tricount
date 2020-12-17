@@ -41,7 +41,9 @@ function createForm() {
 	f.appendChild(s);
 	document.getElementsByTagName('body')[0].appendChild(f);
 }
-
-const insertAfter = (node, element) => {
-	element.parentNode.insertBefore(node, element.nextElementSibling);
-};
+function createNewEmailImput(){
+	var newForm = document.createElement("input");
+	newForm.setAttribute('type', "email");
+	newForm.setAttribute('placeholder', "email");
+	emailForm.appendChild(newForm)
+}
