@@ -30,7 +30,7 @@
         <div class="d-flex justify-content-center">
         <table id="createdTable">
            <?php
-                $creacionQuery = $dbconection->prepare('SELECT name,depart,arrival,depart_date,arrival_date FROM tricount.travels order by depart_date;');
+                $creacionQuery = $dbconection->prepare('SELECT name,depart,arrival,depart_date,arrival_date FROM tricount.TRAVELS order by depart_date;');
                 $creacionQuery->execute();
                 $creacionQuery=$creacionQuery->fetchAll();
                 echo "<tr>";
@@ -52,7 +52,7 @@
         </table>
         <table id=updateTable>
             <?php
-                $actualizacionQuery = $dbconection->prepare('SELECT name,depart,arrival,depart_date,arrival_date FROM tricount.travels order by arrival_date;');
+                $actualizacionQuery = $dbconection->prepare('SELECT name,depart,arrival,depart_date,arrival_date FROM tricount.TRAVELS order by arrival_date;');
                 $actualizacionQuery->execute();
                 $actualizacionQuery=$actualizacionQuery->fetchAll();
                 echo "<tr>";

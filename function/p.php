@@ -1,14 +1,12 @@
 <?php
 declare(strict_types=1);
 
-function connectToDatabase(string $user = 'root', string $pass = '', string $host = 'localhost', string $dbname = 'tricount')
+function connectToDatabase(string $user = 'exercises', string $pass = 'exercises', string $host = 'localhost', string $dbname = 'tricount')
 {
-	$username = $user;
-	$password = $pass;
 	$dsn = 'mysql:host=' . $host . ';dbname=' . $dbname . ';';
 
 	try {
-		$pdo = new PDO($dsn, $username, $password);
+		$pdo = new PDO($dsn, $user, $pass);
 		return $pdo;
 	} catch (PDOException $e) {
 		echo "Connection failed: " . $e->getMessage();
@@ -26,7 +24,7 @@ function intoColumnsForQuery(array $columns):string {
 	return $result;
 }
 
-function executeSelect(string $table, array $columns): bool {
+function executeSelect(string $table, array $columns): array {
 	$pdo = connectToDatabase();
 	$cols = intoColumnsForQuery($columns);
 	$query = $pdo->prepare('SELECT ' . $cols . 'FROM ' . $table . ';');

@@ -1,12 +1,12 @@
 USE `tricount`;
 
-INSERT INTO USERS (name, surname, username, password) VALUES ('John', 'Doe', 'jd', 'jd');
+INSERT INTO USERS (name, surname, email, username, password) VALUES ('John', 'Doe', 'jd@jd.com', 'jd', 'jd');
 
-INSERT INTO USERS (name, surname, username, password) VALUES ('David', 'Mao', 'dm', 'dm');
+INSERT INTO USERS (name, surname, email, username, password) VALUES ('David', 'Mao', 'dm@dm.com','dm', 'dm');
 
-INSERT INTO USERS (name, surname, username, password) VALUES ('Becca', 'Lander', 'bl', 'bl');
+INSERT INTO USERS (name, surname, email, username, password) VALUES ('Becca', 'Lander', 'bl@bl.com', 'bl', 'bl');
 
-INSERT INTO USERS (name, surname, username, password) VALUES ('Leah', 'Dunkey', 'ld', 'ld');
+INSERT INTO USERS (name, surname, email, username, password) VALUES ('Leah', 'Dunkey', 'ld@ld.com', 'ld', 'ld');
 
 INSERT INTO TRAVELS (name, depart, arrival, depart_date, arrival_date) VALUES ('Travel 1', 'Barcelona', 'Mongolia', '2020-12-01', '2020-12-10');
 
