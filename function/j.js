@@ -1,18 +1,60 @@
 function messageWarning(number, message) {
-	let numberCodeWarning = number;
-	let msgInWarning = message;
-	if (numberCodeWarning === 1) {
-		document.getElementById("warningSpace").innerHTML = ('<div style="background-color:#fe2222; width:50%;"><h5>Error:' + msgInWarning + '</h5></div>');
+	"use strict";
+	if (number === 1) {
+		document.getElementById("warningSpace").innerHTML = ('<div style="background-color:#fe2222; width:50%;"><h5>Error:' + message + '</h5></div>');
 	}
-	if (numberCodeWarning === 2) {
-		document.getElementById("warningSpace").innerHTML = ('<div style="background-color:#65ea0f; width:50%;"><h5>Succes:' + msgInWarning + '</h5></div>');
+	if (number === 2) {
+		document.getElementById("warningSpace").innerHTML = ('<div style="background-color:#65ea0f; width:50%;"><h5>Succes:' + message + '</h5></div>');
 	}
 	else {
-		document.getElementById("warningSpace").innerHTML = ('<div style="background-color:#ebf81e; width:50%;"><h5>Warning:' + msgInWarning + '</h5></div>');
+		document.getElementById("warningSpace").innerHTML = ('<div style="background-color:#ebf81e; width:50%;"><h5>Warning:' + message + '</h5></div>');
 	}
 }
 
+function isNumeric(num) {
+  return !isNaN(parseFloat(num)) && isFinite(num);
+}
+
+function insertAfter(newNode, existingNode) {
+	existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+}
+
+function customCreateElement(tag, text, parent, beforeElement, attributes) {
+    let element = document.createElement(tag);
+    if (text) {
+        let txtNode = document.createTextNode(text);
+        element.appendChild(txtNode);
+    }
+    if (attributes != null) {
+        for (var key in attributes){
+            element.setAttribute(key, attributes[key]);
+        }
+    }
+    if (beforeElement != undefined && parent != undefined) {
+        customNextElement = beforeElement.nextElementSibling;
+        insertAfter(element,beforeElement);
+    } else if (beforeElement != undefined) {
+        parent.appendChild(element);
+		}
+		
+}
+
+function addNextElement(elementToSelect, elementToAdd) {
+	let elem = document.getElementsByTagName(elementToSelect)[0];
+	let lastElemElement = elem.children[elem.children.length -1];
+	let lastValue = lastElemElement.innerText;
+
+	customCreateElement(elementToAdd, lastValue * 2, elem, lastElemElement);
+}
+
+function destroyElement(elementToDelete) {
+    elementToDelete.parentNode.removeChild(elementToDelete);
+    
+}
+
 function createForm() {
+	"use strict";
+
 	var f = document.createElement("form");
 	f.setAttribute('method', "post");
 	f.setAttribute('action', "invitations.html");
@@ -47,3 +89,4 @@ function createNewEmailImput(){
 	newForm.setAttribute('placeholder', "email");
 	emailForm.appendChild(newForm)
 }
+
