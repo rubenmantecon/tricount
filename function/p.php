@@ -56,3 +56,14 @@ function executeInsert(string $table, array $columnsAndValues): bool{
 	//$result = $query->fetchAll();
 	return true;
 }
+
+function processEmailInvitations(array $invitationEmails) {
+	$dbEmails = executeSelect("USERS", "email");
+	foreach ($invitationEmails as $email) {
+		if (in_array($email, $dbEmails)) {
+			mail($email, 'Notificació: Has sigut convidat/da a un viatge', 'Estimat/da usuari/ària de Tricount:\n Vés a gastar d\'una vegada, òstia!');
+		} else if (!(in_array($email, $dbEmails))) {
+			mail($email, 'Notificació: Has sigut convidat/da a registrar-te per a un viatge', 'Estimat/da convidat/da:\n Encara no ets usuari/ària de Tricount. Uneix-te a nosaaaaltrresssss... Cereeeebroooos');
+		}
+	}
+}
