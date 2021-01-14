@@ -44,7 +44,7 @@ if (isset($_POST['logearse'])) {
 		// Queremos que el email tenga un formato adecuado
 		if (filter_var($_POST['emailog'], FILTER_VALIDATE_EMAIL)) {
 			$sanitizedData['email'] = $_POST['emailog'];
-			$emailsquery = executeSelect2("USERS", "email");
+			$emailsquery = executeSelect("USERS", "email");
 			foreach ($emailsquery as $debug) {
 				foreach ($debug as $debug2) {
 					if ($debug2 == $sanitizedData['email']) {
