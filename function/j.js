@@ -1,5 +1,4 @@
 function messageWarning(number, message) {
-	"use strict";
 	if (number === 1) {
 		document.getElementById("warningSpace").innerHTML = ('<div style="background-color:#fe2222; width:50%;"><h5>Error:' + message + '</h5></div>');
 	}
@@ -53,8 +52,6 @@ function destroyElement(elementToDelete) {
 }
 
 function createForm() {
-	"use strict";
-
 	var f = document.createElement("form");
 	f.setAttribute('method', "post");
 	f.setAttribute('action', "invitations.html");
