@@ -75,11 +75,6 @@
   color: #ef3b3a;
   text-decoration: none;
 }
-
-.form .register-form {
-  display: none;
-}
-
 .container {
   position: relative;
   z-index: 1;

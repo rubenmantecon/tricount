@@ -7,7 +7,7 @@ declare(strict_types=1); ?>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Login</title>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -32,6 +32,7 @@ $errorLog = array();
 include '../function/p.php';
 $sanitizedData = [];
 $dbconection = connectToDatabase();
+emailExist('jd@jd.com');
 if (isset($_POST['logearse'])) {
 	// Requerimos el email también:
 	if (empty($_POST["password"])) {
@@ -73,68 +74,6 @@ if (isset($_POST['logearse'])) {
 	}
 }
 ?>
-<?php
-//Sanitiizacion del register
-$sanitizedDataReg = [];
-$errorReg = array();
-if (isset($_POST['registrarse'])) {
-	// Requerimos el email también:
-	if (empty($_POST["passwordreg"])) {
-		//Codigo sergio
-		array_push($errorReg, "Tienes que insertar una contraseñaa");
-	} else {
-		if (empty($_POST["passwordreg2"])) {
-			array_push($errorReg, "Las contraseñas no coinciden");
-		} else {
-			if ($_POST["passwordreg"] = $_POST["passwordreg2"]) {
-				$sanitizedDataReg['passwordreg'] = $_POST['passwordreg'];
-			}
-		}
-	}
-
-	if (empty($_POST['name'])) {
-		array_push($errorReg, "Tienes que insertar un nombre");
-	} else {
-		$sanitizedDataReg['name'] = $_POST['name'];
-	}
-	if (empty($_POST['surname'])) {
-		array_push($errorReg, "Tienes que insertar un apellido");
-	} else {
-		$sanitizedDataReg['surname'] = $_POST['surname'];
-	}
-	if (empty($_POST['username'])) {
-		array_push($errorReg, "Tienes que insertar un nombre de usuario");
-	} else {
-		$sanitizedDataReg['username'] = $_POST['username'];
-	}
-	if (empty($_POST["emailreg"])) {
-		array_push($errorReg, "Tienes que insertar un correo");
-	} else {
-		// Queremos que el email tenga un formato adecuado
-		if (filter_var($_POST['emailreg'], FILTER_VALIDATE_EMAIL)) {
-			$sanitizedDataReg['emailreg'] = $_POST['emaire'];
-			$emailsqueryreg = executeSelect2("USERS", "email");
-			foreach ($emailsqueryreg as $debug) {
-				foreach ($debug as $debug2) {
-					if ($debug2 == $sanitizedData['emailreg']) {
-						array_push($errorReg, "Ese correo ya existe");
-					} else {
-						$userInsert = $dbconection->prepare('INSERT INTO 
-						users(name,surname,email,username,password)
-					VALUES
-						("' . $sanitizedDataReg['name'] . '","' . $sanitizedDataReg['surname'] . '","' . $sanitizedDataReg['emailreg'] . '","' . $sanitizedDataReg['username'] . '","' . $sanitizedDataReg['passwordreg'] . '");');
-						$userInsert->execute();
-						$userInsert = $userInsert->fetchAll();
-					}
-				};
-			}
-		} else {
-			//Codigo sergio
-			array_push($errorLog, "Correo no valido");
-		}
-	}
-}
-?>
 
 <body>
 	<?php require("header.php"); ?>
@@ -146,20 +85,9 @@ if (isset($_POST['registrarse'])) {
 	</div>
 	<div class="form">
 		<div class="thumbnail"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Tux_Mono.svg" /></div>
-		<form class="register-form">
-			<input type="text" placeholder="name" name="name" />
-			<input type="text" placeholder="surname" name="surname" />
-			<input type="text" placeholder="username" name="username" />
-			<input type="password" placeholder="password" name="passwordreg" id="passwordreg" />
-			<input type="password" placeholder="password" name="passwordreg2" id="passwordreg2" />
-			<input type="text" placeholder="email address" name="emailreg" id="emailreg" />
-			<button type="submit" nanme="registrarse">create</button>
-			<p class="message">Ya estas registrado? <a href="#">Sign In</a></p>
-		</form>
 		<form class="login-form" action="login.php" method="post">
 			<input type="text" placeholder="email" name="emailog" id="emailog" />
 			<input type="password" placeholder="password" name="password" id="password" />
-			<input type="submit" name="logearse"></button>
 			<?php
 			echo "<div class='errorColor'>";
 			foreach ($errorLog as $x) {
@@ -167,12 +95,10 @@ if (isset($_POST['registrarse'])) {
 			}
 			echo "</div>";
 			?>
-			<p class="message">Not registered? <a href="#">Create an account</a></p>
+			<input type="submit" name="logearse"></button>
+			<p class="message">Not registered? <a href="register.php">Create an account</a></p>
 		</form>
 	</div>
-
-	<script src="../function/reglog.js"></script>
-	<script src="../function/j.js"></script>
 	<?php require("footer.html") ?>
 </body>
 
