@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 function connectToDatabase(string $user = 'exercises', string $pass = 'exercises', string $host = 'localhost', string $dbname = 'tricount')
@@ -76,7 +77,8 @@ function processEmailInvitations(array $invitationEmails)
 	}
 }
 
-function classifyEmails(array $invitationEmails): array {
+function classifyEmails(array $invitationEmails): array
+{
 	$existingEmails = [];
 	$nonExistentEmails = [];
 	$dbEmails = executeSelect("USERS", "email");
@@ -86,7 +88,20 @@ function classifyEmails(array $invitationEmails): array {
 		} else if (!(in_array($email, $dbEmails))) {
 			$nonExistingEmails[] = $email;
 		}
-
 	}
+
 	return array('inDB' => $existingEmails, 'notInDB' => $nonExistentEmails);
+}
+function emailExist(string $email)
+{
+	$pdo = connectToDatabase();
+	$query = 'SELECT count(*) from tricount.users where email ="' . $email . '"';
+	$execute = $pdo->prepare($query);
+	$execute->execute();
+	$result = $execute->fetchAll();
+	if ($result[0][0] == 0) {
+		return (false);
+	} else {
+		return (true);
+	};
 }
