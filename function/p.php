@@ -14,7 +14,8 @@ function connectToDatabase(string $user = 'exercises', string $pass = 'exercises
 	}
 }
 
-function intoColumnsForQuery(array $columns):string {
+function intoColumnsForQuery(array $columns): string
+{
 	$result = '';
 	foreach ($columns as $c) {
 		$result .= $c;
@@ -24,46 +25,68 @@ function intoColumnsForQuery(array $columns):string {
 	return $result;
 }
 
-function executeSelect(string $table, string $columns): array {
+function executeSelect(string $table, string $columns): array
+{
 	$pdo = connectToDatabase();
 	$query = $pdo->prepare('SELECT ' . $columns . ' FROM ' . $table . ';');
 	$query->execute();
-	$e= $query->errorInfo();
-  if ($e[0]!='00000') {
+	$e = $query->errorInfo();
+	if ($e[0] != '00000') {
 		$errormsg = '';
 		$errormsg .= "\nPDO::errorInfo():\n" . "Error accedint a dades: " . $e[2];
 		return $errormsg;
-  }
+	}
 	$result = $query->fetchAll();
 	return $result;
 }
 
-function executeInsert(string $table, array $columnsAndValues): bool{
+function executeInsert(string $table, array $columnsAndValues): bool
+{
 	$pdo = connectToDatabase();
 	$cols = array_keys($columnsAndValues);
 	$columns = intoColumnsForQuery($cols);
 	$vals = array_keys(array_flip($columnsAndValues));
 	$values = intoColumnsForQuery($vals);
 
-	$query = $pdo->prepare('INSERT INTO ' . $table . ' (' . $columns .' VALUES(' . $values . 'FROM ' . $table . ';');
+	$query = $pdo->prepare('INSERT INTO ' . $table . ' (' . $columns . ' VALUES(' . $values . 'FROM ' . $table . ';');
 	$query->execute();
-	$e= $query->errorInfo();
-  if ($e[0]!='00000') {
+	$e = $query->errorInfo();
+	if ($e[0] != '00000') {
 		$errormsg = '';
 		$errormsg .= "\nPDO::errorInfo():\n" . "Error accedint a dades: " . $e[2];
 		return $errormsg;
-	}	
+	}
 	//$result = $query->fetchAll();
 	return true;
 }
 
-function processEmailInvitations(array $invitationEmails) {
+function processEmailInvitations(array $invitationEmails)
+{
+	$dbEmails = executeSelect("USERS", "email");
+	foreach ($invitationEmails as $email) {
+		try {
+			if (in_array($email, $dbEmails)) {
+				mail($email, 'Notificació: Has sigut convidat/da a un viatge', 'Estimat/da usuari/ària de Tricount:\\n Vés a gastar d\'una vegada, òstia!');
+			} else if (!(in_array($email, $dbEmails))) {
+				mail($email, 'Notificació: Has sigut convidat/da a registrar-te per a un viatge', 'Estimat/da convidat/da:\n Encara no ets usuari/ària de Tricount. Uneix-te a nosaaaaltrresssss... Cereeeebroooos');
+			}
+		} catch (\Throwable $th) {
+			die("Something went wrong: " . $th->getMessage());
+		}
+	}
+}
+
+function classifyEmails(array $invitationEmails): array {
+	$existingEmails = [];
+	$nonExistentEmails = [];
 	$dbEmails = executeSelect("USERS", "email");
 	foreach ($invitationEmails as $email) {
 		if (in_array($email, $dbEmails)) {
-			mail($email, 'Notificació: Has sigut convidat/da a un viatge', 'Estimat/da usuari/ària de Tricount:\\n Vés a gastar d\'una vegada, òstia!');
+			$existingEmails[] = $email;
 		} else if (!(in_array($email, $dbEmails))) {
-			mail($email, 'Notificació: Has sigut convidat/da a registrar-te per a un viatge', 'Estimat/da convidat/da:\n Encara no ets usuari/ària de Tricount. Uneix-te a nosaaaaltrresssss... Cereeeebroooos');
+			$nonExistingEmails[] = $email;
 		}
+
 	}
+	return array('inDB' => $existingEmails, 'notInDB' => $nonExistentEmails);
 }
