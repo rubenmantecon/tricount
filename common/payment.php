@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 include '../function/p.php';
 $dbconection = connectToDatabase();
@@ -31,18 +32,25 @@ session_start();
 	}
 
 	?>
-	<h1>Advanced Payment</h1>
-	<!-- //Falta mostrar info a través de la sesión -->
+	<div class="minheight d-flex justify-content-center">
+		<div class="text-center ">
+			<h1>Pago</h1>
+			<!-- //Falta mostrar info a través de la sesión -->
 
-	<form method="post" enctype="multipart/form">
-		<input name="payment" id="payment" type="number">
-		<select name="debtor" id="debtor">
-			<?php
-			foreach ($users as $user => $nameAndSurname) {
-				echo "<option name=\"amount\">{$nameAndSurname["name"]} {$nameAndSurname["surname"]}</option>";
-			}
-			?>
-		</select>
-		<button type="submit">Posa el que deus</button>
-	</form>
+			<form method="post" enctype="multipart/form">
+				<div>
+					<input name="payment" id="payment" type="number">
+					<select name="debtor" id="debtor">
+						<?php
+						foreach ($users as $user => $nameAndSurname) {
+							echo "<option name=\"amount\">{$nameAndSurname["name"]} {$nameAndSurname["surname"]}</option>";
+						}
+						?>
+					</select>
+				</div>
+				<button class="mt-3" type="submit">Posa el que deus</button>
+			</form>
+		</div>
+	</div>
+	<?php require("footer.html"); ?>
 </body>

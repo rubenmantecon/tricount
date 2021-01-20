@@ -1,3 +1,10 @@
+
+$('#add').click(function(){
+	let input = `<div><input type="text" name="email[]" placeholder="email"></div>`
+	console.log("hola")
+	$('#emailsForm').append(input);
+})
+
 function messageWarning(number, message) {
 	if (number === 1) {
 		document.getElementById("warningSpace").innerHTML = ('<div style="background-color:#fe2222; width:50%;"><h5>Error:' + message + '</h5></div>');
@@ -79,13 +86,5 @@ function createForm() {
 	f.appendChild(p);
 	f.appendChild(s);
 	document.getElementsByTagName('body')[0].appendChild(f);
-}
-function newEmailField() {
-	var newForm = document.createElement("input");
-	newForm.setAttribute('type', "email");
-	newForm.setAttribute('name', "email[]");
-	newForm.setAttribute('placeholder', "email");
-
-	emailForm.appendChild(newForm);
 }
 

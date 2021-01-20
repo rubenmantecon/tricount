@@ -26,7 +26,7 @@ $('#addTravel').click(function(){
     $('#addTravel').attr("disabled",true)
     let form = `
     <div class="d-flex">
-    <form method="post">
+    <form method="post" class="login-form">
     <label for="travelName">Nombre del viaje</label><br>
     <input type="text" id="travelName" name="travelName"><br>
     <label for="travelDescription">Descripcion</label><br>
