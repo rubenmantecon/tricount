@@ -2,18 +2,6 @@ DROP DATABASE IF EXISTS `tricount`;
 CREATE DATABASE `tricount`;
 USE `tricount`;
 
-DROP TABLE IF EXISTS `USERS`;
-
-CREATE TABLE `USERS` (
-`id` int(3) PRIMARY KEY AUTO_INCREMENT
-,`name` varchar(20) NOT NULL
-,`surname` varchar(20) NOT NULL
-, `email` varchar(30) NOT NULL
-,`username` varchar(20) NOT NULL
-,`password` varchar(255) NOT NULL
-);
-
-
 DROP TABLE IF EXISTS `TRAVELS`;
 
 /*Maybe in TRAVELS there should be a check
@@ -32,14 +20,26 @@ CREATE TABLE `TRAVELS` (
 , `arrival_date` date NOT NULL
 );
 
+DROP TABLE IF EXISTS `USERS`;
 
+CREATE TABLE `USERS` (
+`id` int(3) PRIMARY KEY AUTO_INCREMENT
+,`name` varchar(20) NOT NULL
+,`surname` varchar(20) NOT NULL
+, `email` varchar(30) NOT NULL
+,`username` varchar(20) NOT NULL
+,`password` varchar(255) NOT NULL
+);
 
 DROP TABLE IF EXISTS `EXPENDITURES`;
 
 CREATE TABLE `EXPENDITURES` (
 `id` int(3) PRIMARY KEY AUTO_INCREMENT
+, `user_id`(3)
+, `travel_id`(3)
 , `amount` decimal(13,2) NOT NULL
 , `emission_date` date NOT NULL
+, CONSTRAINT fk_user_travel
 );
 
 DROP TABLE IF EXISTS `USERS-USERS`;
