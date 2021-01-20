@@ -37,11 +37,10 @@ DROP TABLE IF EXISTS `EXPENDITURES`;
 
 CREATE TABLE `EXPENDITURES` (
 `id` int(3) PRIMARY KEY AUTO_INCREMENT
-, `user_id` int(3)
-, `travel_id` int(3)
+, `user_id` int(3) NOT NULL
+, `travel_id` int(3) NOT NULL
 , `amount` decimal(13,2) NOT NULL
 , `emission_date` date NOT NULL
-, CONSTRAINT fk_user_travel
 );
 
 DROP TABLE IF EXISTS `USERS-USERS`;
