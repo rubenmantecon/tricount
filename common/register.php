@@ -82,7 +82,7 @@ if (isset($_POST['registrarse'])) {
 	}
 	// Queremos que el email tenga un formato adecuado
 	if (count($errorReg) == 0) {
-		$sql = 'INSERT INTO	tricount.users(name, surname, email, username, password) VALUES ("' . $sanitizedDataReg['name'] . '","' . $sanitizedDataReg['surname'] . '","' . $sanitizedDataReg['emailreg'] . '","' . $sanitizedDataReg['username'] . '","' . $sanitizedDataReg['passwordreg'] . '");';
+		$sql = 'INSERT INTO	tricount.USERS(name, surname, email, username, password) VALUES ("' . $sanitizedDataReg['name'] . '","' . $sanitizedDataReg['surname'] . '","' . $sanitizedDataReg['emailreg'] . '","' . $sanitizedDataReg['username'] . '","' . $sanitizedDataReg['passwordreg'] . '");';
 		$userInsert = $dbconection->prepare($sql);
 		$userInsert->execute();
 	}

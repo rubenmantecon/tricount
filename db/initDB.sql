@@ -13,8 +13,10 @@ to filter this in the PHP server logic, not the backend itself*/
 
 CREATE TABLE `TRAVELS` (
 `id` int(3) PRIMARY KEY AUTO_INCREMENT
+, `id_owner` int(3) NOT NULL
 , `name` varchar(30) NOT NULL
-, `depart` varchar(30) NOT NULL
+, `description` varchar(30)
+, `currency` varchar(10)
 , `arrival` varchar(30) NOT NULL
 , `depart_date` date NOT NULL
 , `arrival_date` date NOT NULL
@@ -24,7 +26,7 @@ DROP TABLE IF EXISTS `USERS`;
 
 CREATE TABLE `USERS` (
 `id` int(3) PRIMARY KEY AUTO_INCREMENT
-,`name` varchar(20) NOT NULL
+,`name` varchar(20) NOT NULL	
 ,`surname` varchar(20) NOT NULL
 , `email` varchar(30) NOT NULL
 ,`username` varchar(20) NOT NULL
@@ -64,7 +66,7 @@ DROP TABLE IF EXISTS `USERS-TRAVELS`;
 
 CREATE TABLE `USERS-TRAVELS`(
 `id_user` int(3)
-, `id_travel`  int(3)
+, `id_travel` int(3)
 , CONSTRAINT `fk_user_travel` FOREIGN KEY (id_user) REFERENCES TRAVELS(id)
 , CONSTRAINT `fk_travel_user` FOREIGN KEY (id_travel) REFERENCES USERS(id)
 );
