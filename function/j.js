@@ -82,7 +82,7 @@ function createForm() {
 }
 function newEmailField() {
 	var newForm = document.createElement("input");
-	newForm.setAttribute('type', "text");
+	newForm.setAttribute('type', "email");
 	newForm.setAttribute('name', "email[]");
 	newForm.setAttribute('placeholder', "email");
 
