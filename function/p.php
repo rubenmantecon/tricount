@@ -38,6 +38,7 @@ function executeSelect(string $table, string $columns): array
 		return $errormsg;
 	}
 	$result = $query->fetchAll();
+
 	return $result;
 }
 
@@ -63,13 +64,17 @@ function executeInsert(string $table, array $columnsAndValues): bool
 
 function processEmailInvitations(array $invitationEmails)
 {
+	$headers[] = 'MIME-Version: 1.0';
+	$headers[] = 'Content-type: text/html; charset=iso-8859-1';
 	$dbEmails = executeSelect("USERS", "email");
 	foreach ($invitationEmails as $email) {
 		try {
 			if (in_array($email, $dbEmails)) {
-				mail($email, 'Notificació: Has sigut convidat/da a un viatge', 'Estimat/da usuari/ària de Tricount:\\n Vés a gastar d\'una vegada, òstia!');
+				mail($email, 'Notificació: Has sigut convidat/da a un viatge', 'Estimat/da usuari/ària de Tricount:\\n V, és a gastar d\'una vegada, òstia!');
+				mail($email, 'Aquest via HTML', file_get_contents(__DIR__ . '/common/mail.html',implode("\r\n", $headers)));
 			} else if (!(in_array($email, $dbEmails))) {
 				mail($email, 'Notificació: Has sigut convidat/da a registrar-te per a un viatge', 'Estimat/da convidat/da:\n Encara no ets usuari/ària de Tricount. Uneix-te a nosaaaaltrresssss... Cereeeebroooos');
+				mail($email, 'Aquest via HTML', file_get_contents(__DIR__ . '/common/mail.html',implode("\r\n", $headers)));
 			}
 		} catch (\Throwable $th) {
 			die("Something went wrong: " . $th->getMessage());
@@ -92,6 +97,7 @@ function classifyEmails(array $invitationEmails): array
 
 	return array('inDB' => $existingEmails, 'notInDB' => $nonExistentEmails);
 }
+
 function emailExist(string $email)
 {
 	$pdo = connectToDatabase();

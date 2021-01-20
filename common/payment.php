@@ -44,11 +44,5 @@ session_start();
 			?>
 		</select>
 		<button type="submit">Posa el que deus</button>
-
-		<form action="upload.php" method="get" enctype="multipart/form-data">
-		<input type="file" name="file[]" id="upload">
-		<input type="submit" value="Upload that shit">
-		</form>
-
 	</form>
 </body>
