@@ -51,12 +51,13 @@ if (isset($_POST['logearse'])) {
 			foreach ($emailsquery as $debug) {
 				foreach ($debug as $debug2) {
 					if ($debug2 == $sanitizedData['email']) {
-						$passwordQuery = $dbconection->prepare('SELECT password, username  FROM tricount.USERS where email ="' . $sanitizedData['email'] . '"');
+						$passwordQuery = $dbconection->prepare('SELECT id,password, username  FROM tricount.USERS where email ="' . $sanitizedData['email'] . '"');
 						$passwordQuery->execute();
 						$passwordQuery = $passwordQuery->fetchAll();
 						if ($passwordQuery[0]["password"] == $sanitizedData["password"]) {
 							$errorLog = false;
 							$_SESSION['username'] = $passwordQuery[0]["username"];
+							$_SESSION['id'] = $passwordQuery[0]["id"];
 							header("Location: home.php");
 							break;
 						} else {

@@ -23,9 +23,10 @@ $('.sortUpdate').click(function() {
 
 $('#addTravel').click(function(){
     console.log("hola")
+    $('#addTravel').attr("disabled",true)
     let form = `
     <div class="d-flex">
-    <form>
+    <form method="post">
     <label for="travelName">Nombre del viaje</label><br>
     <input type="text" id="travelName" name="travelName"><br>
     <label for="travelDescription">Descripcion</label><br>
@@ -36,7 +37,7 @@ $('#addTravel').click(function(){
         <option value="dolar">Dolar</option>
         <option value="yen">Yenes</option>
     </select><br>
-    <input type="submit">   
+    <input type="submit" name="addTravel" id="addTravel">   
     </form>
     <a type="button" id="closeForm" class="btn btn-secondary btn-lg style='height: 50px;'>X</a>
     </div>`;

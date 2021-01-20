@@ -72,7 +72,7 @@ session_start();
             </table>
             <table id=updateTable>
                 <?php
-                $actualizacionQuery = $dbconection->prepare('SELECT id,name,depart,arrival,depart_date,arrival_date FROM tricount.TRAVELS order by arrival_date;');
+                $actualizacionQuery = $dbconection->prepare('SELECT id,name,depart,arrival,depart_date,arrival_date FROM tricount.TRAVELS where id = "' . $_SESSION['id'] . '" order by arrival_date;');
                 $actualizacionQuery->execute();
                 $actualizacionQuery = $actualizacionQuery->fetchAll();
                 echo "<tr>";
@@ -94,7 +94,7 @@ session_start();
             </table>
         </div>
         <div class="d-flex justify-content-center">
-            <a type="button" id="addTravel" class="btn btn-secondary btn-lg">Añadir viaje</a>
+            <button id="addTravel" class="btn btn-secondary btn-lg">Añadir viaje</button>
 
         </div>
         <div id="travelForm" class="d-flex justify-content-center"></div>
