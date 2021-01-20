@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 include '../function/p.php';
 $dbconection = connectToDatabase();
@@ -24,8 +23,11 @@ session_start();
 	$users = executeSelect("USERS", "name, surname");
 
 	//Validation
-	if ((isset($_POST['payment'])) && (isset($_POST['debtor']))) {
-		//Ejecutar un insert de los datos 
+	if ((!empty($_POST['payment'])) && (!empty($_POST['debtor']))) {
+		array_push($_SESSION, $_POST['payment']);
+		array_push($_SESSION, $_POST['debtor']);
+		echo $_POST['payment'] . " " . $_POST['debtor'];
+		print_r($_SESSION);
 	}
 
 	?>
@@ -42,6 +44,11 @@ session_start();
 			?>
 		</select>
 		<button type="submit">Posa el que deus</button>
+
+		<form action="upload.php" method="get" enctype="multipart/form-data">
+		<input type="file" name="file[]" id="upload">
+		<input type="submit" value="Upload that shit">
+		</form>
 
 	</form>
 </body>
