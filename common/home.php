@@ -22,6 +22,22 @@ session_start();
 <body>
 
     <?php require("header.php"); ?>
+    <script>
+        function dofunction(id) {
+            var idViaje = {
+                'id': id,
+            }
+            $.ajax({
+                type: 'GET',
+                url: '../function/detalls.php',
+                data: idViaje,
+                dataType: 'json',
+                encode: true,
+            }).done(function(data) {
+                console.log("hola")
+            })
+        }
+    </script>
     <div class="minheight">
         <div id="warningSpace" class="d-flex justify-content-center buttons text-center">
 
@@ -33,7 +49,7 @@ session_start();
         <div class="d-flex justify-content-center">
             <table id="createdTable">
                 <?php
-                $creacionQuery = $dbconection->prepare('SELECT name,depart,arrival,depart_date,arrival_date FROM tricount.TRAVELS order by depart_date;');
+                $creacionQuery = $dbconection->prepare('SELECT id,name,depart,arrival,depart_date,arrival_date FROM tricount.TRAVELS order by depart_date;');
                 $creacionQuery->execute();
                 $creacionQuery = $creacionQuery->fetchAll();
                 echo "<tr>";
@@ -44,10 +60,11 @@ session_start();
                 echo "</tr>";
                 foreach ($creacionQuery as $viaje) {
                     echo "<tr>";
-                    echo "  <td> " . $viaje['name'] . "  </td>";
+                    echo "  <td >" . $viaje['name'] . "  </td>";
                     echo "  <td> " . $viaje['depart'] . "  </td>";
                     echo "  <td> " . $viaje['depart_date'] . "  </td>";
                     echo "  <td> " . $viaje['arrival_date'] . "  </td>";
+                    echo "  <td> <button onclick='dofunction(" . $viaje['id'] . ")'> Detalles </button> </td>";
                     echo "</tr>";
                 }
                 ?>
@@ -55,7 +72,7 @@ session_start();
             </table>
             <table id=updateTable>
                 <?php
-                $actualizacionQuery = $dbconection->prepare('SELECT name,depart,arrival,depart_date,arrival_date FROM tricount.TRAVELS order by arrival_date;');
+                $actualizacionQuery = $dbconection->prepare('SELECT id,name,depart,arrival,depart_date,arrival_date FROM tricount.TRAVELS order by arrival_date;');
                 $actualizacionQuery->execute();
                 $actualizacionQuery = $actualizacionQuery->fetchAll();
                 echo "<tr>";
@@ -66,10 +83,11 @@ session_start();
                 echo "</tr>";
                 foreach ($actualizacionQuery as $viaje) {
                     echo "<tr>";
-                    echo "  <td> " . $viaje['name'] . "  </td>";
+                    echo "  <td >" . $viaje['name'] . "  </td>";
                     echo "  <td> " . $viaje['depart'] . "  </td>";
                     echo "  <td> " . $viaje['depart_date'] . "  </td>";
                     echo "  <td> " . $viaje['arrival_date'] . "  </td>";
+                    echo "  <td> <button onclick='dofunction(" . $viaje['id'] . ")'> Detalles </button> </td>";
                     echo "</tr>";
                 }
                 ?>
