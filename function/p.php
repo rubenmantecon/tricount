@@ -85,7 +85,7 @@ function processEmailInvitations(array $invitationEmails)
 function classifyEmails(array $invitationEmails): array
 {
 	$existingEmails = [];
-	$nonExistentEmails = [];
+	$nonExistingEmails = [];
 	$dbEmails = executeSelect("USERS", "email");
 	foreach ($invitationEmails as $email) {
 		if (in_array($email, $dbEmails)) {
@@ -95,7 +95,7 @@ function classifyEmails(array $invitationEmails): array
 		}
 	}
 
-	return array('inDB' => $existingEmails, 'notInDB' => $nonExistentEmails);
+	return array('inDB' => $existingEmails, 'notInDB' => $nonExistingEmails);
 }
 
 function emailExist(string $email)
