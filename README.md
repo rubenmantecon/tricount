@@ -1,5 +1,5 @@
 # tricount
-A Tricount web clone written in PHP, SQL, and a bit of Bootstrap. 
+A Tricount web clone written in PHP, SQL, JS and a bit of Bootstrap.
 
 # Requirements
 LAMP stack or derivatives
