@@ -12,11 +12,11 @@ CREATE USER exercises@localhost IDENTIFIED BY 'exercises';
 GRANT ALL on tricount.* TO exercises@localhost;
 ```
 
-Run the initial SQL scripts:
+Clone the repo, `cd` into it and run the initial SQL scripts:
 
 ```
-sudo mysql < initDB.sql
-sudo mysql < populateDB.sql
+sudo mysql < db/initDB.sql
+sudo mysql < db/populateDB.sql
 ```
 
 Inspect the scripts for more information about what gets inserted. For now, you can login with username **jd@jd.com** and password **jd**:
