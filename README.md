@@ -1,10 +1,10 @@
 # tricount
 A Tricount web clone written in PHP, SQL, JS and a bit of Bootstrap.
 
-# Requirements
+## Requirements
 LAMP stack or derivatives
 
-# Setup
+## Setup
 Create a database and username for the app. Also, grant privileges to said database:
 ```
 CREATE DATABASE tricount;
